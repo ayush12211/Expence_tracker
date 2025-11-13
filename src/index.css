@@ -1,0 +1,438 @@
+/* src/index.css — Full stylesheet (layout, cards, charts, lists, and exact modal styles) */
+
+/* Tokens */
+:root {
+  --bg: #2f2f2f;
+  --outer-panel: #3f3f3f;
+  --inner-card: #a9a9a9;
+  --muted: #9f9f9f;
+  --text: #ffffff;
+  --accent-green: #7cf06b;
+  --accent-yellow: #ffc44d;
+  --btn-yellow-start: #f0ad4e;
+  --btn-yellow-end: #f39c12;
+  --btn-add-start: #ffd0d0;
+  --btn-add-end: #ff6b6b;
+  --btn-income-start: #cfff86;
+  --btn-income-end: #9fe24a;
+  --shadow-lg: 0 12px 18px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 10px 20px rgba(20, 20, 20, 0.12);
+  --radius-lg: 14px;
+  --radius-md: 10px;
+}
+
+/* Reset / base */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  padding: 18px;
+  line-height: 1.2;
+}
+
+/* App container and heading */
+.app-root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 34px;
+  font-weight: 800;
+  margin: 8px 0 14px 8px;
+  color: #fff;
+  letter-spacing: -0.4px;
+}
+
+/* Top panel (outer big dark rounded container) */
+.top-panel {
+  background: var(--outer-panel);
+  padding: 22px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr 360px;
+  gap: 18px;
+  align-items: center;
+}
+
+/* Inner light cards (wallet & expenses) */
+.inner-card {
+  background: var(--inner-card);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.25);
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+
+/* Wallet / expenses title & balance */
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #f5f5f5;
+  margin: 0;
+}
+.card-balance {
+  font-size: 28px;
+  font-weight: 800;
+  margin-left: 6px;
+}
+
+/* Pill buttons (Add Income/Add Expense) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 26px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+.pill.income {
+  background: linear-gradient(
+    90deg,
+    var(--btn-income-start),
+    var(--btn-income-end)
+  );
+  color: #06290a;
+}
+.pill.expense {
+  background: linear-gradient(90deg, var(--btn-add-start), var(--btn-add-end));
+  color: #2f0a0a;
+}
+.pill.ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+/* Chart card (rightmost) */
+.chart-card {
+  background: var(--outer-panel);
+  padding: 18px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Legend for pie */
+.legend-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  align-items: center;
+}
+.legend-item {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 13px;
+}
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+/* History section */
+.history {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+/* Recent transactions white card */
+.recent-card {
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 18px;
+  min-height: 260px;
+  position: relative;
+  padding-left: 16px;
+}
+
+/* Transaction list items */
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  cursor: default;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.tx-meta {
+  flex: 1;
+  min-width: 0;
+}
+.tx-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: #222;
+}
+.tx-date {
+  font-size: 13px;
+  color: #9b9b9b;
+  margin-top: 6px;
+}
+.tx-amount {
+  color: var(--accent-yellow);
+  font-weight: 800;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Action badges */
+.tx-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: 12px;
+}
+.action-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+.action-badge.del {
+  background: #ff6b6b;
+}
+.action-badge.edit {
+  background: #f7b731;
+  color: #1a1a1a;
+}
+
+/* Pagination bubble */
+.pagination {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.page-btn {
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+}
+.page-num {
+  background: #2ca58d;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+/* Top expenses white card */
+.top-expenses-card {
+  background: #fff;
+  color: #222;
+  padding: 18px;
+  border-radius: 12px;
+  min-height: 260px;
+}
+
+/* Recharts helpers */
+.recharts-wrapper {
+  width: 100%;
+  height: 220px;
+}
+.recharts-label-list text {
+  font-weight: 700;
+  font-size: 12px;
+  fill: #222;
+}
+
+/* Edit inline form inside list */
+.edit-form {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ============================
+   MODAL: FADED PAGE + BRIGHT CARD
+   Exact modal visuals matching provided screenshots
+   ============================ */
+
+/* Overlay: pale fade so the whole page looks lighter under modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85); /* pale fade */
+  backdrop-filter: blur(2px);
+  z-index: 120;
+}
+
+/* Modal card: bright, crisp, with shadow and rounded corners */
+.modal-card {
+  width: 560px;
+  max-width: calc(100% - 40px);
+  background: #ffffff; /* solid white for crisp text */
+  color: #111;
+  padding: 22px 22px 18px 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 40px rgba(10, 10, 10, 0.12);
+  transform: translateY(-6px);
+}
+
+/* Modal heading (bold and large) */
+.modal-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #111;
+}
+
+/* Two-column row inside modal */
+.modal-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* Input styling — pill-like white inputs with inner shadow */
+.modal-input {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 6px 12px rgba(20, 20, 20, 0.06),
+    inset 0 2px 6px rgba(0, 0, 0, 0.03);
+  font-size: 14px;
+  color: #222;
+  outline: none;
+}
+.modal-input::placeholder {
+  color: #cfcfcf;
+}
+
+/* Primary button (warm yellow) — left and prominent */
+.modal-btn-primary {
+  background: linear-gradient(
+    90deg,
+    var(--btn-yellow-start),
+    var(--btn-yellow-end)
+  );
+  color: #111;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(243, 156, 18, 0.12);
+  cursor: pointer;
+  min-width: 170px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cancel button: light grey rounded */
+.modal-btn-cancel {
+  background: #f1f1f1;
+  color: #222;
+  border-radius: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 12px rgba(20, 20, 20, 0.04);
+  cursor: pointer;
+  min-width: 110px;
+}
+
+/* Actions row: primary left, cancel right (matches screenshots) */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 18px;
+  align-items: center;
+}
+
+/* Date picker indicator slightly adjusted */
+.modal-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(20%);
+}
+
+/* small responsive adjustments */
+@media (max-width: 560px) {
+  .top-panel {
+    grid-template-columns: 1fr;
+  }
+  .history {
+    grid-template-columns: 1fr;
+  }
+  .chart-card {
+    order: 3;
+  }
+  .modal-card {
+    width: calc(100% - 32px);
+    padding: 16px;
+  }
+  .modal-row {
+    flex-direction: column;
+  }
+  .modal-btn-primary,
+  .modal-btn-cancel {
+    min-width: 100%;
+  }
+}
