@@ -5,6 +5,7 @@ import ExpenseList from "./components/ExpenseList";
 import Charts from "./components/Charts";
 import { loadFromStorage, saveToStorage } from "./utils/Storage";
 
+
 const STORAGE_KEYS = {
   BALANCE: "walletBalance",
   EXPENSES: "expenses",

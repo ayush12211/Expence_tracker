@@ -1,4 +1,4 @@
-/* src/index.css — Full stylesheet (layout, cards, charts, lists, and exact modal styles) */
+/* /* src/index.css — Full stylesheet (layout, cards, charts, lists, and exact modal styles)
 
 /* Tokens */
 :root {
@@ -435,4 +435,4 @@ h1 {
   .modal-btn-cancel {
     min-width: 100%;
   }
-}
+}  

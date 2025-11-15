@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-// Grader expects inputs named: title, price, category, date
+
+
 export default function ExpenseForm({ onAddExpense }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({

@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-/**
- * ExpenseList with pagination (3 items per page)
- *
- * Props:
- * - expenses: array of { id, title, price, category, date }
- * - onEdit(updatedExpense)
- * - onDelete(id)
- */
+
+
 
 const PER_PAGE = 3;
 
@@ -21,16 +15,16 @@ export default function ExpenseList({ expenses = [], onEdit, onDelete }) {
   });
   const [page, setPage] = useState(1);
 
-  // Keep page in-range when expenses change
+
   useEffect(() => {
     const totalPages = Math.max(1, Math.ceil(expenses.length / PER_PAGE));
     if (page > totalPages) setPage(totalPages);
     if (expenses.length === 0) setPage(1);
   }, [expenses.length, page]);
 
-  // Prepare sorted list (newest first)
+  
   const sorted = [...expenses].sort((a, b) => {
-    // If date is not a valid date, keep original order via fallback to timestamps or id
+   
     const da = new Date(a.date).getTime() || 0;
     const db = new Date(b.date).getTime() || 0;
     return db - da;
@@ -114,7 +108,7 @@ export default function ExpenseList({ expenses = [], onEdit, onDelete }) {
               onClick={() => {
                 if (confirm("Delete this expense?")) {
                   onDelete(exp.id);
-                  // if deleting last item on page, step back if necessary (handled by useEffect)
+                  
                 }
               }}
               title="Delete"

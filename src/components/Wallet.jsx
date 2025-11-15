@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 export default function Wallet({ balance, onAddIncome }) {
   const [open, setOpen] = useState(false);
   const [amount, setAmount] = useState("");

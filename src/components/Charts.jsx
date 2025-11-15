@@ -1,4 +1,6 @@
 import React from "react";
+
+
 import {
   PieChart,
   Pie,
@@ -20,7 +22,7 @@ function computeByCategory(expenses) {
     const cat = e.category || "Other";
     map[cat] = (map[cat] || 0) + Number(e.price);
   }
-  // order so bars and legend look consistent in examples: Entertainment, Food, Travel, Other
+  
   const order = ["Entertainment", "Food", "Travel", "Other"];
   const keys = Object.keys(map).sort(
     (a, b) => order.indexOf(a) - order.indexOf(b)
@@ -32,7 +34,7 @@ function computeByCategory(expenses) {
   }));
 }
 
-// custom label for pie percentage inside slice
+
 const renderCustomizedLabel = (props) => {
   const { cx, cy, midAngle, innerRadius, outerRadius, percent } = props;
   const RADIAN = Math.PI / 180;
